@@ -1,0 +1,5 @@
+# Your own books contain personal data. Keep them out of the repo.
+*-briefing-book.html
+my-books/
+*-workspace/
+.DS_Store

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!-- Example interview briefing book for a FICTIONAL candidate (Riley Navarro) and company (Ledgerline). Built from assets/template.html. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ledgerline hiring manager intro: briefing book (example)</title>
+<style>
+:root{
+  --bg:#f3f4f7;--surface:#ffffff;--surface-2:#eef0f4;--border:#d9dde5;--border-soft:#e6e9ef;
+  --text:#16181d;--text-mid:#454b57;--text-dim:#6b7280;
+  --accent:#c2410c;--accent-soft:rgba(194,65,12,.10);
+  --say:#1d8a4c;--frame:#a8690f;--ask:#2563a8;--avoid:#b83232;--land:#7e4e93;
+  --code-bg:#f0f1f5;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13151a;--surface:#1b1e25;--surface-2:#232731;--border:#2f343f;--border-soft:#262a33;
+    --text:#eef0f4;--text-mid:#b4bac6;--text-dim:#8a91a0;
+    --accent:#ff7a33;--accent-soft:rgba(255,122,51,.13);
+    --say:#4ed18a;--frame:#e3ad45;--ask:#63a9ea;--avoid:#ea6f65;--land:#c9a2da;--code-bg:#101217;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13151a;--surface:#1b1e25;--surface-2:#232731;--border:#2f343f;--border-soft:#262a33;
+  --text:#eef0f4;--text-mid:#b4bac6;--text-dim:#8a91a0;
+  --accent:#ff7a33;--accent-soft:rgba(255,122,51,.13);
+  --say:#4ed18a;--frame:#e3ad45;--ask:#63a9ea;--avoid:#ea6f65;--land:#c9a2da;--code-bg:#101217;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+code{font-family:var(--mono);font-size:.86em;background:var(--code-bg);padding:1px 5px;border-radius:3px}
+
+/* ---------- sticky header ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--border)}
+.inner{max-width:980px;margin:0 auto;padding:0 20px}
+.brand{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:14px}
+.brand h1{font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
+.brand h1 span{color:var(--accent)}
+.brand .meta{font-size:.82rem;color:var(--text-dim)}
+.brand .right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cuebtn{font:600 .8rem var(--sans);padding:5px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-mid);cursor:pointer}
+.cuebtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pipe{display:flex;gap:6px;margin:12px 0 10px;overflow-x:auto}
+.stage{flex:1 1 0;min-width:110px;border:1px solid var(--border);border-radius:6px;padding:7px 10px;background:var(--surface)}
+.stage b{display:block;font-size:.8rem;font-weight:600}
+.stage small{font-size:.72rem;color:var(--text-dim)}
+.stage.now{border-color:var(--accent);background:var(--accent-soft)}
+.stage.now b{color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.76rem;color:var(--text-dim);padding-bottom:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
+.tabs{display:flex;gap:2px;overflow-x:auto}
+.tab{font:500 .88rem var(--sans);color:var(--text-dim);background:none;border:none;border-bottom:2px solid transparent;padding:9px 13px;cursor:pointer;white-space:nowrap;margin-bottom:-1px}
+.tab:hover{color:var(--text-mid)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+
+/* ---------- layout ---------- */
+main{max-width:980px;margin:0 auto;padding:26px 20px 90px}
+.panel{display:none}.panel.active{display:block}
+h2{font-size:1.04rem;font-weight:650;color:var(--text-mid);margin:34px 0 12px}
+.intro{color:var(--text-mid);max-width:74ch;margin-bottom:12px}
+.intro b{color:var(--text)}
+.banner{background:var(--accent-soft);border:1px solid var(--accent);color:var(--text);border-radius:8px;padding:10px 14px;font-size:.9rem;margin-bottom:18px}
+
+/* ---------- cards ---------- */
+.card{background:var(--surface);border:1px solid var(--border-soft);border-left:3px solid var(--border);border-radius:6px;padding:15px 18px;margin-bottom:10px}
+.card.say{border-left-color:var(--say)}.card.frame{border-left-color:var(--frame)}.card.ask{border-left-color:var(--ask)}.card.avoid{border-left-color:var(--avoid)}
+.chip{display:inline-block;font-size:.74rem;font-weight:650;padding:2px 8px;border-radius:3px;margin-bottom:6px}
+.chip.say{background:color-mix(in srgb,var(--say) 14%,transparent);color:var(--say)}
+.chip.frame{background:color-mix(in srgb,var(--frame) 15%,transparent);color:var(--frame)}
+.chip.ask{background:color-mix(in srgb,var(--ask) 14%,transparent);color:var(--ask)}
+.chip.avoid{background:color-mix(in srgb,var(--avoid) 14%,transparent);color:var(--avoid)}
+.q{font-size:1.12rem;font-weight:650;line-height:1.4;margin:2px 0 4px}
+.mini{font-size:.84rem;font-weight:600;color:var(--text-dim);margin-bottom:2px}
+.line{font-size:1.02rem;line-height:1.55}
+.note{font-size:.88rem;color:var(--text-dim);margin-top:8px}
+.note b{color:var(--text-mid)}
+.src{font-size:.78rem;color:var(--text-dim);margin-top:6px}
+.fill{background:var(--accent-soft);color:var(--accent);font-style:italic;border-radius:3px;padding:0 4px}
+
+/* ---------- beats: scannable spoken answers ---------- */
+.beats{list-style:none;margin:10px 0 2px;display:flex;flex-direction:column;gap:6px}
+.beat{display:grid;grid-template-columns:86px 1fr;gap:2px 12px;padding:9px 12px;border-radius:7px;border-left:4px solid var(--bk);background:color-mix(in srgb,var(--bk) 8%,var(--surface))}
+.beat.open{--bk:var(--accent)}.beat.build{--bk:var(--ask)}.beat.prove{--bk:var(--say)}.beat.land{--bk:var(--land)}
+.beat.opt{border-left-style:dashed}
+.beat .lab{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--bk);padding-top:4px}
+.beat .cue{font-weight:600;font-size:1.04rem;line-height:1.4}
+.beat .full{display:block;font-size:.93rem;color:var(--text-mid);margin-top:3px;line-height:1.55}
+.optag{font-size:.7rem;font-weight:600;color:var(--frame);margin-left:8px;white-space:nowrap}
+body.cues .beat .full,body.cues .note,body.cues .src,body.cues .optag{display:none}
+body.cues .beat{padding:7px 12px}
+
+/* ---------- under pressure ---------- */
+.pressure{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:16px 18px;margin-bottom:10px}
+.mantra{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+.bkey{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--text-mid);margin-bottom:12px}
+.bkey i{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:6px}
+.panic{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--border-soft)}
+.panic>div{padding:8px 8px 8px 0;border-bottom:1px solid var(--border-soft);font-size:.94rem}
+.panic>div:nth-child(odd){color:var(--text-dim);font-weight:600;font-size:.84rem;padding-top:10px}
+.panic>div:nth-child(even){font-weight:600}
+.prules{margin:12px 0 0 18px;font-size:.88rem;color:var(--text-mid)}
+
+/* ---------- maps, boxes, lists ---------- */
+.map{background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;overflow:hidden}
+.row{display:grid;grid-template-columns:1fr 18px 1.15fr;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border-soft)}
+.row:last-child{border-bottom:none}
+.row .n{color:var(--text-mid);font-size:.92rem}.row .a{color:var(--say)}.row .p{font-size:.92rem;font-weight:500}
+.conf{font-size:.7rem;font-weight:650;padding:1px 7px;border-radius:3px;margin-left:6px;white-space:nowrap}
+.conf.stated{color:var(--say);background:color-mix(in srgb,var(--say) 13%,transparent)}
+.conf.likely{color:var(--ask);background:color-mix(in srgb,var(--ask) 13%,transparent)}
+.conf.guess{color:var(--frame);background:color-mix(in srgb,var(--frame) 14%,transparent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co{background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;padding:15px 18px}
+.co.full{grid-column:1/-1}
+.co h3{font-size:.98rem;font-weight:650;margin-bottom:7px}
+.co p,.co li{font-size:.9rem;color:var(--text-mid)}
+.co ul{padding-left:18px}.co li{margin-bottom:4px}.co b{color:var(--text)}
+.tk{background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;padding:15px 18px;margin-bottom:10px}
+.tk h3{font-size:1rem;font-weight:650;margin-bottom:8px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 14px;font-size:.9rem}
+.kv .k{color:var(--text-dim);font-size:.8rem;padding-top:2px}.kv .v{color:var(--text-mid)}
+.kv .v.quote{color:var(--frame)}
+.angle{margin-top:10px;padding-top:9px;border-top:1px solid var(--border-soft);font-size:.93rem}
+.angle b{color:var(--say)}
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:12px 16px 12px 50px;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;margin-bottom:8px;font-size:.93rem;color:var(--text-mid)}
+ol.steps li::before{content:counter(s);position:absolute;left:16px;top:11px;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:.8rem;display:grid;place-items:center}
+ol.steps li b{color:var(--text)}
+.note-block{font-family:var(--mono);font-size:.8rem;line-height:1.6;background:var(--code-bg);border:1px solid var(--border-soft);border-radius:6px;padding:14px 16px;overflow-x:auto;white-space:pre-wrap;color:var(--text-mid)}
+.note-block b{color:var(--accent);font-weight:600}
+.check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border-soft);font-size:.93rem;color:var(--text-mid)}
+.check input{margin-top:5px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0}
+.check b{color:var(--text)}
+.reply{white-space:pre-wrap;font-size:.95rem;background:var(--surface-2);border-radius:6px;padding:14px 16px}
+.copybtn{font:600 .8rem var(--sans);margin-top:8px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer}
+
+/* ---------- auto index ---------- */
+.toc{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:14px 18px;margin:0 0 24px}
+.toc-h{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);margin-bottom:6px}
+.toc>ol{list-style:none;columns:2 300px;column-gap:28px}
+.toc>ol>li{break-inside:avoid;margin:6px 0}
+.toc ul{list-style:none;margin:3px 0 4px 12px;border-left:2px solid var(--border-soft);padding-left:10px}
+.toc ul li{margin:3px 0;font-size:.9rem;line-height:1.4}
+.toc a{color:var(--text);text-decoration:none}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:0 0 0 3px transparent}}
+.totop{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;font:600 .85rem var(--sans);padding:9px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer;display:none}
+.totop.show{display:block}
+
+@media (max-width:720px){
+  .pipe,.legend{display:none}
+  .grid2{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}.row .a{display:none}
+  .kv{grid-template-columns:1fr}
+  .beat{grid-template-columns:1fr}.beat .lab{padding-top:0}
+  .panic{grid-template-columns:1fr}.panic>div:nth-child(odd){border-bottom:0;padding-bottom:0}
+}
+@media (prefers-reduced-motion:reduce){.flash{animation:none}}
+@media print{.topbar{position:static}.tabs,.toc,.totop,.cuebtn{display:none}.panel{display:block!important;margin-bottom:28px}body.cues .beat .full{display:block}}
+</style>
+</head>
+<body data-book-id="ledgerline-hm-intro-example">
+
+<div class="topbar">
+  <div class="inner">
+    <div class="brand">
+      <h1>Ledgerline <span>hiring manager intro</span> briefing book</h1>
+      <div class="right">
+        <span class="meta">Customer Engineer, Integrations · with Sam Okafor, Head of Customer Engineering · Thu Nov 12, 10:00 PT · 30 min Zoom</span>
+        <button class="cuebtn" id="cueBtn" type="button" aria-pressed="false">Cues only</button>
+      </div>
+    </div>
+    <div class="pipe" aria-label="Hiring process">
+      <div class="stage now"><b>Hiring manager intro</b><small>30 min · you are here</small></div>
+      <div class="stage"><b>Integration walkthrough</b><small>60 min · debug a broken integration live</small></div>
+      <div class="stage"><b>Team panel</b><small>~2 hrs · support, product, eng (unconfirmed)</small></div>
+      <div class="stage"><b>References + offer</b><small>1 week (per recruiter)</small></div>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--say)"></i>Say with confidence</span>
+      <span><i style="background:var(--frame)"></i>A gap, framed honestly</span>
+      <span><i style="background:var(--ask)"></i>Ask them</span>
+      <span><i style="background:var(--avoid)"></i>Trap</span>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="plan" aria-selected="true">Battle plan</button>
+      <button class="tab" role="tab" data-tab="drills" aria-selected="false">Call drills</button>
+      <button class="tab" role="tab" data-tab="want" aria-selected="false">What they want</button>
+      <button class="tab" role="tab" data-tab="domain" aria-selected="false">Integration ticket map</button>
+      <button class="tab" role="tab" data-tab="company" aria-selected="false">Company</button>
+      <button class="tab" role="tab" data-tab="prep" aria-selected="false">Before the call</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= BATTLE PLAN ================= -->
+<section id="plan" class="panel active" role="tabpanel">
+<p class="banner"><b>Example book.</b> Riley Navarro, Ledgerline, Sam Okafor and every number and URL here are fictional. URLs use the reserved <code>.example</code> domain. This shows what a finished book looks like.</p>
+<nav class="toc" data-auto></nav>
+
+<h2>Under pressure</h2>
+<div class="pressure">
+  <p class="mantra">Pick the shape. Answer first. Prove it. Land it. Stop.</p>
+  <div class="bkey">
+    <span><i style="background:var(--accent)"></i>Open: the answer in one line</span>
+    <span><i style="background:var(--ask)"></i>Build: context, two sentences max</span>
+    <span><i style="background:var(--say)"></i>Prove: what you did (most of your time)</span>
+    <span><i style="background:var(--land)"></i>Land: the result, tied to them</span>
+  </div>
+  <div class="panic">
+    <div>You blank</div><div>"Let me pick the best example for that. Give me a second."</div>
+    <div>You're rambling</div><div>"The short version is…" Then the headline, and stop.</div>
+    <div>You don't know</div><div>"I haven't done that exactly. The closest thing I've done is…"</div>
+    <div>Question is fuzzy</div><div>"Do you mean the technical side, or how I handled the people?"</div>
+    <div>You lost the thread</div><div>"I went a bit wide. Did that answer what you were asking?"</div>
+  </div>
+  <ul class="prules">
+    <li><b>"I", not "we"</b>, for the parts you did. Credit others by name.</li>
+    <li><b>Three depths:</b> 30 seconds (headline), 90 seconds (default), 5 minutes only if they keep pulling.</li>
+    <li><b>Read only the bold cue words.</b> Turn on <b>Cues only</b> (top right) for the call. Silence after a good answer is fine.</li>
+  </ul>
+</div>
+
+<h2>Settle first: the hybrid schedule</h2>
+<div class="card say" data-q="Can you do three days in the Denver office?">
+  <span class="chip say">Say (only if true)</span>
+  <p class="q">"The role is hybrid, three days a week in Denver. Does that work?"</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Answer</span><div><b class="cue">Yes, three days works</b><span class="full">Yes, three days a week in the Denver office works for me.</span></div></li>
+    <li class="beat land"><span class="lab">Why</span><div><b class="cue">Twenty minutes away; I like being near the engineers</b><span class="full">I'm about twenty minutes away, and for integration work I like being near the engineers who own the API.</span></div></li>
+  </ol>
+  <p class="note">The recruiter asked this in the scheduling email. Sam may confirm it in the first minute. A hedged yes is worse than a clear answer either way.</p>
+</div>
+
+<h2>First 30 seconds: who you are</h2>
+<div class="card say" data-q="Tell me about yourself">
+  <span class="chip say">Say · Explain shape · ~45 seconds</span>
+  <p class="q">"Walk me through your background."</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">One-liner</span><div><b class="cue">Seven years making carrier data trustworthy</b><span class="full">I spent seven years at Harbor &amp; Hale, a freight brokerage, making the data from about 300 carriers trustworthy enough to bill from.</span></div></li>
+    <li class="beat build"><span class="lab">How it worked</span><div><b class="cue">I owned the EDI integration queue</b><span class="full">I owned the queue for our EDI integrations: when a carrier's status messages broke, dispatch and billing came to me, and I found out why.</span></div></li>
+    <li class="beat prove"><span class="lab">Proof</span><div><b class="cue">Same failure twice → I build a check</b><span class="full">When the same failure showed up twice, I wrote a check so it didn't show up a third time. Those Python checks became our carrier-onboarding tooling.</span></div></li>
+    <li class="beat land"><span class="lab">Where I fit</span><div><b class="cue">Now: integrations as the whole job</b><span class="full">After the acquisition eliminated my role, I shipped manifest-lint, an open-source validator for shipping manifests. I want integration support to be the whole job, not the side of it.</span></div></li>
+  </ol>
+  <p class="note">Sam's message said your "EDI debugging background stood out." Confirm it fast, then let Sam talk.</p>
+</div>
+
+<h2>The one idea to land</h2>
+<div class="card say">
+  <span class="chip say">Say</span>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Claim</span><div><b class="cue">Integrations break at the seams</b><span class="full">Integrations rarely break inside one system. They break at the seams: a time zone, a retry, a field two systems read differently.</span></div></li>
+    <li class="beat land"><span class="lab">Point</span><div><b class="cue">I find the seam, then close it for everyone</b><span class="full">My whole job has been finding the seam, fixing it for the customer in front of me, and then closing it so the next customer never hits it.</span></div></li>
+  </ol>
+  <p class="note">Mirrors the posting's line "fix it once, for every customer." Don't quote it back; say it in your own words.</p>
+</div>
+
+<h2>Your proof → their asks</h2>
+<div class="map">
+  <div class="row"><span class="n">"Debug customer integrations across APIs and webhooks"</span><span class="a">→</span><span class="p">7 years owning EDI integrations with ~300 carriers: malformed messages, retries, duplicates, time zones.</span></div>
+  <div class="row"><span class="n">"Strong with HTTP, JSON and at least one scripting language"</span><span class="a">→</span><span class="p">Python daily; carrier-onboarding checks; manifest-lint (CLI, 40+ tests, published on PyPI).</span></div>
+  <div class="row"><span class="n">"Turn repeat issues into tooling or docs"</span><span class="a">→</span><span class="p">Onboarding checks cut new-carrier setup from about 3 days to 1. A one-page EDI error runbook for dispatch.</span></div>
+  <div class="row"><span class="n">"Communicate clearly with technical and non-technical customers"</span><span class="a">→</span><span class="p">Trained 12 dispatchers to read EDI error codes themselves. Weekly carrier calls about failing feeds.</span></div>
+</div>
+
+<h2>Gaps: name them before they do</h2>
+<div class="card frame" data-q="No payments or invoicing experience">
+  <span class="chip frame">Gap shape</span>
+  <p class="mini">Payments and invoicing domain</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Name it</span><div><b class="cue">New to payments</b><span class="full">I haven't worked in payments or invoicing directly.</span></div></li>
+    <li class="beat prove"><span class="lab">Closest evidence</span><div><b class="cue">Freight billing ran on my data</b><span class="full">The closest thing is that freight billing ran on the data I kept clean. If a status message was wrong, an invoice was wrong.</span></div></li>
+    <li class="beat build"><span class="lab">Plan</span><div><b class="cue">Already in your sandbox and docs</b><span class="full">I've already worked through your quickstart in the sandbox, and I'm reading up on idempotency and reconciliation.</span></div></li>
+    <li class="beat land"><span class="lab">Land</span><div><b class="cue">The domain's new; the debugging isn't</b><span class="full">The domain is new to me. Debugging data moving between two companies' systems isn't.</span></div></li>
+  </ol>
+</div>
+<div class="card frame" data-q="Python, not TypeScript">
+  <span class="chip frame">Gap shape</span>
+  <p class="mini">Their main SDK is Node/TypeScript</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Name it</span><div><b class="cue">Python is my strongest</b><span class="full">Python is where I'm strongest.</span></div></li>
+    <li class="beat prove"><span class="lab">Closest evidence</span><div><b class="cue">Read and patched JS in our carrier portal</b><span class="full">I've read and patched JavaScript in our carrier portal, but I haven't shipped TypeScript.</span></div></li>
+    <li class="beat land"><span class="lab">Land</span><div><b class="cue">Your Python SDK first; TS by the walkthrough</b><span class="full">Your Python SDK means I'm useful from day one, and I'll be comfortable in your Node SDK by the integration walkthrough.</span></div></li>
+  </ol>
+  <p class="note">The posting says "Node or Python." Don't apologize. One honest sentence and a plan.</p>
+</div>
+<div class="card frame" data-q="Internal customers, not external developers">
+  <span class="chip frame">Gap shape</span>
+  <p class="mini">External, developer-facing customers</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Name it</span><div><b class="cue">Mostly internal, plus carriers</b><span class="full">Most of my customers were internal teams, plus the carriers' own IT people.</span></div></li>
+    <li class="beat prove"><span class="lab">Closest evidence</span><div><b class="cue">Weekly calls with carrier engineers</b><span class="full">The carriers were external, technical, and often annoyed. I ran weekly calls with their engineers to get failing feeds fixed on their side.</span></div></li>
+    <li class="beat land"><span class="lab">Land</span><div><b class="cue">Same job: their system, my evidence</b><span class="full">It's the same skill: their system, my evidence, a fix they can act on.</span></div></li>
+  </ol>
+</div>
+
+<h2>Questions to ask (pick three or four)</h2>
+<div class="card ask" data-q="Webhook retries: docs say 5, sandbox did 3">
+  <span class="chip ask">Ask, strongest (you found it)</span>
+  <p class="line">Your webhooks guide says failed deliveries retry five times, but in the sandbox I saw three retries. Is the sandbox different from production, and how does support find out when behavior like that changes?</p>
+  <p class="note">First-hand: you ran this on Nov 9. Ask it as curiosity, not a gotcha. It's exactly the docs-drift problem this team owns.</p>
+  <p class="src">Source: <a href="https://docs.ledgerline.example/webhooks#retries">docs: Webhooks › Retries</a> · checked 2026-11-09 · your sandbox test, 2026-11-09</p>
+</div>
+<div class="card ask" data-q="Top ticket categories">
+  <span class="chip ask">Ask</span>
+  <p class="line">What are the top three integration ticket categories right now, and which one would you most like to make disappear?</p>
+  <p class="note">Listen for duplicates, webhook failures, reconciliation. All prepped on the ticket map tab.</p>
+</div>
+<div class="card ask" data-q="Idempotency keys and duplicate invoices">
+  <span class="chip ask">Ask</span>
+  <p class="line">The October changelog made idempotency keys required on invoice creation. Did duplicate-invoice tickets drop after that, or did they move somewhere else?</p>
+  <p class="src">Source: <a href="https://ledgerline.example/changelog#2026-10-06">changelog: Oct 6, 2026</a> · checked 2026-11-09</p>
+</div>
+<div class="card ask" data-q="What does great look like at six months?">
+  <span class="chip ask">Ask</span>
+  <p class="line">Six months in, what separates a great customer engineer here from a good one?</p>
+  <p class="note">Tells you exactly how you'll be judged. Specifics are a good sign.</p>
+</div>
+<div class="card ask" data-q="How do repeat issues reach product?">
+  <span class="chip ask">Ask</span>
+  <p class="line">When the same integration problem keeps coming up, how does it get back to product? Is there a regular path, or does it depend on who notices?</p>
+</div>
+<div class="card ask" data-q="Anything give you pause?">
+  <span class="chip ask">Ask, closer (if it's going well)</span>
+  <p class="line">Is there anything in my background that gives you pause for this role? I'd rather address it while we're talking.</p>
+</div>
+
+<h2>Traps</h2>
+<div class="card avoid"><span class="chip avoid">Avoid</span><p class="line">Explaining EDI in depth. Sam doesn't need X12 segment names. Say "the status messages carriers send us" and move on.</p></div>
+<div class="card avoid"><span class="chip avoid">Avoid</span><p class="line">Criticizing the acquiring company. One flat sentence about the role being eliminated, then forward.</p></div>
+<div class="card avoid"><span class="chip avoid">Avoid</span><p class="line">Opening with manifest-lint's internals. It proves you ship. The onboarding checks prove you remove repeat work, which is the job.</p></div>
+
+<h2>If comp comes up</h2>
+<div class="card frame">
+  <span class="chip frame">Frame</span>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Answer</span><div><b class="cue">The posted range works</b><span class="full">The posted range works for me.</span></div></li>
+    <li class="beat land"><span class="lab">Next</span><div><b class="cue">Equity details when we get there</b><span class="full">I'd like to understand the equity side when we get there.</span></div></li>
+  </ol>
+  <p class="note">Posted: $128k–$150k base plus equity (careers page, checked 2026-11-09). Don't negotiate in an intro call.</p>
+</div>
+
+<h2>Close</h2>
+<div class="card say">
+  <span class="chip say">Say</span>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Claim</span><div><b class="cue">Your seams are the ones I've worked</b><span class="full">This is the most direct fit I've seen: the seams your customers hit are the ones I've spent seven years on.</span></div></li>
+    <li class="beat land"><span class="lab">Next</span><div><b class="cue">Glad to debug something live next round</b><span class="full">I'd enjoy debugging a broken integration live in the next round.</span></div></li>
+  </ol>
+</div>
+</section>
+
+<!-- ================= CALL DRILLS ================= -->
+<section id="drills" class="panel" role="tabpanel">
+<p class="intro">Every answer is in beats. <b>Read only the bold cue words</b>; the sentence underneath is for practice. Highlighted parts are details only you can supply. Don't tell a story you can't defend under follow-up.</p>
+<nav class="toc" data-auto></nav>
+
+<h2>Story bank</h2>
+<div class="card say" data-q="Tricky issue you took to the root cause — Time-traveling shipments">
+  <span class="chip say">Say · Story</span>
+  <p class="q">"Tell me about a tricky issue you took to the root cause."</p>
+  <p class="mini">The time-traveling shipments</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Headline</span><div><b class="cue">Shipments "delivered" before pickup</b><span class="full">One carrier's shipments started showing as delivered before they'd been picked up.</span></div></li>
+    <li class="beat build"><span class="lab">Setup</span><div><b class="cue">Messages valid; billing on hold</b><span class="full">Every message passed validation, nothing in our parser had changed, and billing had frozen 140 loads because the timeline made no sense.</span></div></li>
+    <li class="beat prove"><span class="lab">What I did</span><div><b class="cue">Lined up raw timestamps → offset missing</b><span class="full">I lined up the raw messages against our parsed events and saw the carrier had dropped the time zone offset after a system upgrade. We were reading Pacific times as UTC.</span></div></li>
+    <li class="beat prove"><span class="lab">The choice</span><div><b class="cue">Patched them, then guarded everyone</b><span class="full">I patched that carrier's mapping the same day, then added a check that flags any carrier whose events arrive out of order, so it couldn't happen silently again.</span></div></li>
+    <li class="beat land"><span class="lab">Result</span><div><b class="cue">Billing unfrozen same day; check caught 2 more</b><span class="full">Billing released the loads that afternoon, and the check caught two other carriers with the same problem within a quarter.</span></div></li>
+    <li class="beat land"><span class="lab">Bridge</span><div><b class="cue">What changed isn't always what broke</b><span class="full">Nothing on our side had changed. The seam had. That's the first question I'd ask on a broken integration here.</span></div></li>
+  </ol>
+  <p class="note"><b>Follow-ups to expect:</b> How did you spot the offset? (Lined up three raw messages in a spreadsheet, so the six-hour gap was obvious.) Why not ask the carrier to fix it? (Did both: patched our side to unblock billing, and sent their engineer the evidence.)</p>
+</div>
+
+<div class="card say" data-q="Automation that removed manual work — Carrier onboarding checks">
+  <span class="chip say">Say · Story</span>
+  <p class="q">"Tell me about something you automated that removed real manual work."</p>
+  <p class="mini">Carrier onboarding checks</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Headline</span><div><b class="cue">New carriers took three days to set up</b><span class="full">Setting up a new carrier's integration used to take about three days of back-and-forth.</span></div></li>
+    <li class="beat build"><span class="lab">Setup</span><div><b class="cue">Same five mistakes every time</b><span class="full">Most of that time went to the same five mistakes: wrong IDs, missing offsets, test messages sent to production.</span></div></li>
+    <li class="beat prove"><span class="lab">What I did</span><div><b class="cue">Python checks carriers ran before go-live</b><span class="full">I wrote a set of Python checks that ran against a carrier's test messages and told them exactly what to fix before go-live. Nobody assigned it; I was tired of the same emails.</span></div></li>
+    <li class="beat land"><span class="lab">Result</span><div><b class="cue">Three days → about one</b><span class="full">Setup dropped to about a day, and <span class="fill">[how many carriers went through it, if you remember]</span>.</span></div></li>
+    <li class="beat land"><span class="lab">Bridge</span><div><b class="cue">Same instinct for your onboarding tickets</b><span class="full">I'd look at your integration onboarding tickets the same way: which mistakes repeat, and can a check catch them first?</span></div></li>
+  </ol>
+  <p class="note">The highlighted gap is the one detail still missing. Fill it or cut the clause.</p>
+</div>
+
+<div class="card say" data-q="Explaining something technical — Dispatch runbook">
+  <span class="chip say">Say · Story</span>
+  <p class="q">"Tell me about explaining something technical to a non-technical person."</p>
+  <p class="mini">The dispatch runbook</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Headline</span><div><b class="cue">Taught dispatchers to read EDI errors</b><span class="full">I taught our 12 dispatchers to read EDI error codes themselves.</span></div></li>
+    <li class="beat prove"><span class="lab">What I did</span><div><b class="cue">One page: what it means, what to do, when to call me</b><span class="full">I wrote a one-page runbook: the six errors they actually saw, what each meant in plain words, what to do, and when to call me.</span></div></li>
+    <li class="beat land"><span class="lab">Result</span><div><b class="cue">Escalations to me roughly halved</b><span class="full">Escalations to me roughly halved, and the ones left were the interesting ones.</span></div></li>
+    <li class="beat land"><span class="lab">Bridge</span><div><b class="cue">Your docs are the runbook for customers</b><span class="full">Your error docs do that job for customers. I'd want to keep them that clear.</span></div></li>
+  </ol>
+</div>
+
+<div class="card say" data-q="How do you handle a busy queue?">
+  <span class="chip say">Say · Process</span>
+  <p class="q">"How do you handle a busy queue?"</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Principle</span><div><b class="cue">How bad before what</b><span class="full">I figure out how bad it is before I figure out what it is.</span></div></li>
+    <li class="beat prove"><span class="lab">Steps</span><div><b class="cue">Money blocked first; status note every touch</b><span class="full">Anything blocking money or shipments goes first. Quick wins get cleared early. Long investigations get a short status note every time I touch them, so anyone can pick them up.</span></div></li>
+    <li class="beat land"><span class="lab">Judgment</span><div><b class="cue">Repeats go on a list; the list becomes tooling</b><span class="full">And I keep a list of what repeats, because that list is where the next check comes from.</span></div></li>
+  </ol>
+</div>
+
+<h2>The awkward ones</h2>
+<div class="card frame" data-q="Why are you looking?">
+  <span class="chip frame">Frame · under 30 seconds</span>
+  <p class="q">"Why are you looking right now?"</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Claim</span><div><b class="cue">Role eliminated after the acquisition</b><span class="full">Harbor &amp; Hale was acquired in the spring, and my role was eliminated in the merge.</span></div></li>
+    <li class="beat prove"><span class="lab">Proof</span><div><b class="cue">Used the time: manifest-lint</b><span class="full">I used the time to build and publish manifest-lint.</span></div></li>
+    <li class="beat land"><span class="lab">Bridge</span><div><b class="cue">Ready for integrations as the whole job</b><span class="full">I'm ready for a role where integration work is the whole job.</span></div></li>
+  </ol>
+  <p class="note">Flat and forward. No opinions about the acquirer.</p>
+</div>
+<div class="card frame" data-q="Your title was Operations Analyst">
+  <span class="chip frame">Frame</span>
+  <p class="q">"Your title was Operations Analyst. How technical was it?"</p>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Claim</span><div><b class="cue">An integration engineering job in practice</b><span class="full">In practice it was an integration engineering job.</span></div></li>
+    <li class="beat prove"><span class="lab">Proof</span><div><b class="cue">Python, SQL, raw EDI, my own tooling</b><span class="full">I worked in Python and SQL every day, read raw EDI, and built and maintained our onboarding tooling.</span></div></li>
+  </ol>
+</div>
+</section>
+
+<!-- ================= WHAT THEY WANT ================= -->
+<section id="want" class="panel" role="tabpanel">
+<p class="intro">What this conversation is screening for. <b>Stated</b> = in the posting or Sam's message. <b>Likely</b> = strong inference. <b>Guess</b> = hedge your prep.</p>
+<nav class="toc" data-auto></nav>
+<h2>What this call is really screening for</h2>
+<div class="map">
+  <div class="row"><span class="n">Can you debug across two companies' systems?<span class="conf stated">Stated</span></span><span class="a">→</span><span class="p">The time-traveling shipments story.</span></div>
+  <div class="row"><span class="n">Will you turn repeats into fixes?<span class="conf stated">Stated</span></span><span class="a">→</span><span class="p">Onboarding checks: three days to one.</span></div>
+  <div class="row"><span class="n">Can you talk to annoyed external engineers?<span class="conf likely">Likely</span></span><span class="a">→</span><span class="p">Weekly carrier calls. Name the internal-customer gap first.</span></div>
+  <div class="row"><span class="n">Is the payments gap a problem?<span class="conf guess">Guess</span></span><span class="a">→</span><span class="p">Gap card: domain new, debugging not. Mention the sandbox work.</span></div>
+</div>
+<h2>Why Ledgerline (your answer)</h2>
+<div class="card say" data-q="Why Ledgerline?">
+  <span class="chip say">Say · Motivation</span>
+  <ol class="beats">
+    <li class="beat open"><span class="lab">Claim</span><div><b class="cue">Invoices are where integration bugs cost real money</b><span class="full">Invoices are where integration bugs cost real money, which is exactly where I want to be useful.</span></div></li>
+    <li class="beat build"><span class="lab">Reason</span><div><b class="cue">Your changelog fixes seams, not just features</b><span class="full">Reading your changelog, a lot of it is closing seams, like required idempotency keys. That's the work I like.</span></div></li>
+    <li class="beat land"><span class="lab">Bridge</span><div><b class="cue">Small team, so the fix reaches everyone</b><span class="full">And at your size, a fix I make for one customer actually reaches all of them.</span></div></li>
+  </ol>
+</div>
+</section>
+
+<!-- ================= DOMAIN PRIMER ================= -->
+<section id="domain" class="panel" role="tabpanel">
+<p class="intro">The integration problems Ledgerline customers are most likely to hit, from their public docs and changelog. <b>Technical details come from docs that change: verify before you rely on one out loud.</b></p>
+<nav class="toc" data-auto></nav>
+<h2>Likely tickets</h2>
+<div class="tk" data-q="Duplicate invoices">
+  <h3>Duplicate invoices</h3>
+  <div class="kv">
+    <span class="k">Customer says</span><span class="v quote">"Our customer got billed twice for the same order."</span>
+    <span class="k">What's going on</span><span class="v">The client retried a create call after a timeout. Without an idempotency key, the retry created a second invoice.</span>
+    <span class="k">Fix / lever</span><span class="v">Send an <code>Idempotency-Key</code> header on every create. Required since Oct 6, 2026; older API versions may still accept calls without it (verify).</span>
+  </div>
+  <div class="angle"><b>Your angle:</b> Carrier retries caused duplicate status events at Harbor &amp; Hale. You've cleaned up the same pattern.</div>
+  <p class="src">Source: <a href="https://docs.ledgerline.example/idempotency">docs: Idempotency</a> · <a href="https://ledgerline.example/changelog#2026-10-06">changelog</a> · checked 2026-11-09</p>
+</div>
+<div class="tk" data-q="Webhook signature fails">
+  <h3>Webhook signature verification fails</h3>
+  <div class="kv">
+    <span class="k">Customer says</span><span class="v quote">"Every webhook fails signature verification, but the secret is right."</span>
+    <span class="k">What's going on</span><span class="v">Their framework parsed the JSON body before verification. The signature covers the raw bytes.</span>
+    <span class="k">Fix / lever</span><span class="v">Verify against the raw request body, then parse.</span>
+  </div>
+  <p class="src">Source: <a href="https://docs.ledgerline.example/webhooks#signatures">docs: Webhooks › Signatures</a> · checked 2026-11-09</p>
+</div>
+<div class="tk" data-q="Sandbox vs live keys">
+  <h3>Works in sandbox, fails in production</h3>
+  <div class="kv">
+    <span class="k">Customer says</span><span class="v quote">"It worked yesterday in testing. Production returns 401."</span>
+    <span class="k">What's going on</span><span class="v">Sandbox keys (<code>sk_test_</code>) used against the live base URL, or the reverse.</span>
+    <span class="k">Fix / lever</span><span class="v">Match the key prefix to the base URL. A one-line check in the docs would prevent most of these.</span>
+  </div>
+  <div class="angle"><b>Your angle:</b> Test messages sent to production was one of your onboarding check's five mistakes.</div>
+</div>
+</section>
+
+<!-- ================= COMPANY ================= -->
+<section id="company" class="panel" role="tabpanel">
+<nav class="toc" data-auto></nav>
+<h2>Ledgerline in brief</h2>
+<div class="grid2">
+  <div class="co full"><h3>One-liner</h3><p>An API that lets software companies create, send and reconcile B2B invoices, so their customers can bill and get paid without building invoicing themselves.</p></div>
+  <div class="co"><h3>Numbers that matter</h3><ul>
+    <li>1,800+ customers <span class="conf likely">company-stated</span></li>
+    <li>$4B invoiced through the API in 2025 <span class="conf likely">company-stated</span></li>
+    <li>About 90 employees, 6 in customer engineering (careers page)</li>
+  </ul></div>
+  <div class="co"><h3>Funding and people</h3><ul>
+    <li>Series A, $22M, March 2026</li>
+    <li>Sam Okafor: Head of Customer Engineering, previously a solutions engineer at a payments company</li>
+  </ul></div>
+  <div class="co full"><h3>What they value (mirror it)</h3><ul>
+    <li>"Fix it once, for every customer." (posting)</li>
+    <li>"Write it down." Docs and runbooks are treated as product.</li>
+  </ul></div>
+</div>
+<p class="src">Sources: ledgerline.example/about, ledgerline.example/careers, ledgerline.example/blog/series-a (all checked 2026-11-09).</p>
+</section>
+
+<!-- ================= BEFORE THE CALL ================= -->
+<section id="prep" class="panel" role="tabpanel">
+<nav class="toc" data-auto></nav>
+<h2>Reply first</h2>
+<div class="reply" id="replyText">Hi Sam, thanks for reaching out. Thursday at 10:00 PT works, and three days a week in Denver works for me. Looking forward to it.
+
+Riley</div>
+<button class="copybtn" type="button" data-copy="replyText">Copy reply</button>
+
+<h2>Homework, in order</h2>
+<div class="check"><input type="checkbox" id="c1"><label for="c1"><b>Send the reply above.</b> It answers the scheduling question in the first line.</label></div>
+<div class="check"><input type="checkbox" id="c2"><label for="c2"><b>Run the sandbox quickstart and one webhook test.</b> Done Nov 9: saw three retries where the docs say five. Now the strongest question in the book.</label></div>
+<div class="check"><input type="checkbox" id="c3"><label for="c3"><b>Fill the highlighted gap</b> in the onboarding story, or cut it.</label></div>
+<div class="check"><input type="checkbox" id="c4"><label for="c4"><b>Say the 30-second intro and the time-traveling shipments story out loud twice,</b> reading only the bold cues.</label></div>
+<div class="check"><input type="checkbox" id="c5"><label for="c5"><b>Day of:</b> open this page, the posting and your resume. Turn on Cues only.</label></div>
+<div class="check"><input type="checkbox" id="c6"><label for="c6"><b>Within a day:</b> a short thank-you that mentions one specific thing Sam said.</label></div>
+</section>
+
+</main>
+<button class="totop" id="toTop" type="button">↑ Index</button>
+
+<script>
+/* Interview briefing book runtime. Content-agnostic: no edits needed. */
+(function(){
+  var book=document.body.getAttribute('data-book-id')||'book';
+  function key(k){return 'ibb:'+book+':'+k}
+  function get(k){try{return localStorage.getItem(key(k))}catch(e){return null}}
+  function set(k,v){try{localStorage.setItem(key(k),v)}catch(e){}}
+  function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'x'}
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e}
+  function link(id,label,bold){var a=el('a');a.href='#'+id;a.setAttribute('data-jump',id);a.appendChild(bold?el('b',null,label):document.createTextNode(label));return a}
+
+  /* tabs */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    if(!document.getElementById(id)) return;
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.id===id)});
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===id?'true':'false')});
+    window.scrollTo(0,0); set('tab',id); updateTop();
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab)})});
+
+  /* auto index: every h2, plus every [data-q] element under it */
+  var used={};
+  document.querySelectorAll('.panel').forEach(function(panel){
+    var nav=panel.querySelector('nav.toc[data-auto]'); if(!nav) return;
+    var groups=[],cur=null;
+    panel.querySelectorAll('h2,[data-q]').forEach(function(node){
+      var label=(node.tagName==='H2'?node.textContent:node.getAttribute('data-q')||'').trim();
+      if(!label) return;
+      if(!node.id){var base=panel.id+'-'+slug(label),id=base,i=2;while(used[id]||document.getElementById(id)){id=base+'-'+(i++)}node.id=id}
+      used[node.id]=1;
+      if(node.tagName==='H2'){cur={id:node.id,label:label,kids:[]};groups.push(cur)}
+      else if(cur){cur.kids.push({id:node.id,label:label})}
+      else{groups.push({id:node.id,label:label,kids:[]})}
+    });
+    if(!groups.length){nav.remove();return}
+    nav.setAttribute('aria-label','Index'); nav.id=panel.id+'-index';
+    nav.appendChild(el('p','toc-h','Jump to'));
+    var ol=el('ol');
+    groups.forEach(function(g){
+      var li=el('li'); li.appendChild(link(g.id,g.label,true));
+      if(g.kids.length){var ul=el('ul');g.kids.forEach(function(k){var kl=el('li');kl.appendChild(link(k.id,k.label,false));ul.appendChild(kl)});li.appendChild(ul)}
+      ol.appendChild(li);
+    });
+    nav.appendChild(ol);
+  });
+
+  function jumpTo(id){
+    var t=document.getElementById(id); if(!t) return;
+    var bar=document.querySelector('.topbar');
+    var y=t.getBoundingClientRect().top+window.scrollY-(bar?bar.offsetHeight:0)-12;
+    var smooth=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:y,behavior:smooth?'smooth':'auto'});
+    t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash');
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-jump]'); if(!a) return;
+    e.preventDefault(); jumpTo(a.getAttribute('data-jump'));
+  });
+  var top=document.getElementById('toTop');
+  function activeIndex(){var p=document.querySelector('.panel.active');return p&&p.querySelector('nav.toc')}
+  function updateTop(){top.classList.toggle('show',!!activeIndex()&&window.scrollY>500)}
+  top.addEventListener('click',function(){var t=activeIndex();if(t)jumpTo(t.id);else window.scrollTo(0,0)});
+  window.addEventListener('scroll',updateTop,{passive:true});
+
+  /* cues-only mode */
+  var cueBtn=document.getElementById('cueBtn');
+  function cues(on){document.body.classList.toggle('cues',on);cueBtn.setAttribute('aria-pressed',on?'true':'false');set('cues',on?'1':'0')}
+  cueBtn.addEventListener('click',function(){cues(!document.body.classList.contains('cues'))});
+
+  /* checklist persistence */
+  document.querySelectorAll('.check input[type=checkbox]').forEach(function(cb){
+    if(get('c:'+cb.id)==='1') cb.checked=true;
+    cb.addEventListener('change',function(){set('c:'+cb.id,cb.checked?'1':'0')});
+  });
+
+  /* copy buttons */
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var src=document.getElementById(btn.getAttribute('data-copy')); if(!src) return;
+      var done=function(){btn.textContent='Copied'},fail=function(){btn.textContent='Select and copy manually'};
+      if(navigator.clipboard){navigator.clipboard.writeText(src.innerText).then(done,fail)}else{fail()}
+    });
+  });
+
+  /* restore */
+  if(get('cues')==='1') cues(true);
+  var saved=get('tab'); if(saved) show(saved);
+})();
+</script>
+</body>
+</html>
