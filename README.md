@@ -11,6 +11,10 @@ Interview prep usually ends up as a wall of notes. When the call starts and your
 - **Honest by design.** It never invents your experience. Anything it doesn't know becomes a highlighted gap for you to fill.
 - **Sourced.** Every question you might ask and every technical fact carries its source and the date it was checked, so you can answer "where did you read that?"
 
+| Practicing: full sentences | On the call: **Cues only** |
+|---|---|
+| ![A story card with full sentences under each cue](docs/screenshot-story.png) | ![The same story card in Cues only mode, showing just the bold cue words](docs/screenshot-cues.png) |
+
 See [`examples/example-book.html`](skills/interview-briefing-book/examples/example-book.html) for a complete book for a fictional candidate (download it and open it in a browser).
 
 ## What's in a book
