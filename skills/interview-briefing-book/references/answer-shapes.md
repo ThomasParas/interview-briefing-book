@@ -65,6 +65,10 @@ Resumes say what happened; stories need the details that make them believable. F
 - Who else was involved, and how did you work with them?
 - What changed afterward so it didn't happen again?
 
+- Why did you do it that way? What made you start? (Only ever use the candidate's own answer.)
+
+Motivations need the same care as numbers. "I got tired of fixing it by hand" reads naturally and is easy to invent, but it's exactly what an interviewer follows up on. If the candidate hasn't said why, the beat gets a prompt instead: `<span class="fill">[why you built it, in your words]</span>`, with possible reasons listed in the note for them to pick from.
+
 Anything still unknown becomes a highlighted gap in the book: `<span class="fill">[how long the fix took]</span>`. Never fill it with something plausible. A gap is honest; a guess is a liability under follow-up.
 
 When two of the candidate's sources tell a story differently (an old prep doc and a new message), ask which version is true rather than merging them. Until they answer, mark the uncertain beats optional:

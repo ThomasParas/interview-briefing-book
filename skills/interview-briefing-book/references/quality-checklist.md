@@ -4,11 +4,15 @@ Run this before handing the book over. Fix what fails; don't just report it.
 
 ## Truth
 
+- [ ] **Source check done:** every first-person sentence and cue points to a resume line, a message, an intake answer or the profile. Anything else was cut, made a highlighted gap, or reframed as an approach ("Here's how I'd handle it").
+- [ ] No habit or self-assessment claims the candidate didn't make ("day to day", "the thing I do best"), and no inflated scope ("my whole department").
 - [ ] Every claim about the candidate comes from their resume, their messages, or their answers to you. Nothing invented: no made-up numbers, durations, outcomes, tools or titles.
+- [ ] **No invented motivations or reasons.** Reread every first-person line that says why: "because…", "I was tired of…", "what I loved…", "so that…", "I wanted…". Each one comes from the candidate, or it's a highlighted prompt for their real reason.
 - [ ] Every unknown the candidate must supply is a highlighted `<span class="fill">[…]</span>` gap, not plausible filler.
 - [ ] Conflicting versions of a story are resolved with the candidate, or the uncertain beats are marked `opt`.
 - [ ] Company claims (user counts, "fastest", growth) are marked company-stated.
-- [ ] Every Ask card and every technical fact that could change has a `<p class="src">` line with a source type, URL and date checked.
+- [ ] At least three questions to ask are grounded in something specific and cite it in a `<p class="src">` line (source type, URL, date checked). Standard questions have no source line.
+- [ ] Every technical fact that could change has a source line.
 - [ ] Where a blog and the docs disagree, the book says so and favors the docs.
 
 ## Usable under stress

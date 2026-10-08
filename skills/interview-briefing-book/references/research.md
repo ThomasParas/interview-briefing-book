@@ -29,6 +29,7 @@ These go into `<p class="src">` lines on the cards. Candidates get asked "where 
 - **Domain primer:** the most common problems their customers hit. Error and troubleshooting docs, FAQ pages, changelogs (each fix implies a past pain), community forums, and the posting's own list of responsibilities.
 - **Questions to ask:** recent launches, changed defaults, deprecations, new pricing, and anything that implies a support, operations or product challenge the role would own.
 - **Company brief:** what they do in one plain sentence, scale numbers (marked company-stated), funding stage and date, founders and leaders, values in their own words.
+  - **Get funding and other fast-moving facts from the company's own newsroom or blog**, not from search-result summaries. Summaries and aggregator pages often lag by a round or two, and "you raised your Series E" when they've since announced a Series F is an awkward thing to say to a hiring manager. Note the date of the most recent announcement you found.
 - **What they want:** the posting's repeated phrases, what it lists first, what it explicitly doesn't want, and anything in the interviewer's message about why they reached out.
 - **The interviewer:** role and public work only (posts, talks). Don't dig into their personal life.
 

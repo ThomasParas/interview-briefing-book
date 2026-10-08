@@ -1,0 +1,74 @@
+{
+  "skill_name": "interview-briefing-book",
+  "evals": [
+    {
+      "id": 1,
+      "name": "support-engineer-hm-intro-full-inputs",
+      "prompt": "I've got a 30 min zoom with Marco, the support engineering manager at Supabase, on Wednesday at 11am PT. The recruiter's email, the posting and my resume are attached. Can you prep me? I want something I can keep open during the call.",
+      "expected_output": "A single self-contained HTML briefing book for this specific hiring-manager intro, with answers in beats, sourced questions, honest gap framing (TypeScript, external developers), the 4-hour Eastern overlap settled first, no invented candidate facts, and a list of questions/gaps for the candidate.",
+      "files": [
+        "evals/files/eval1_resume.md",
+        "evals/files/eval1_message.md",
+        "evals/files/eval1_posting.md"
+      ],
+      "assertions": [
+        "Produces exactly one self-contained HTML book",
+        "No leftover template placeholders",
+        "Spoken answers are in beats with bold cues (>= 15 beats)",
+        "Has Cues only toggle and auto index",
+        "At least 3 questions to ask are grounded in a cited source URL",
+        "Unknown candidate details are marked as highlighted gaps",
+        "Writes down questions for the candidate (>= 3)",
+        "No invented candidate facts (judged)",
+        "Settles the US-Eastern overlap requirement",
+        "Frames the TypeScript gap honestly on a Frame card"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "career-changer-recruiter-screen-sparse-inputs",
+      "prompt": "recruiter screen with Notion next tuesday for a product operations role. this is literally all I have, my resume is attached. I'm nervous, help me prep",
+      "expected_output": "A briefing book scoped to a recruiter screen, built from sparse inputs without inventing experience: unknowns marked as highlighted gaps, a batch of questions for the candidate, a career-change gap framed honestly, and research on the company and role sourced.",
+      "files": [
+        "evals/files/eval2_resume.md"
+      ],
+      "assertions": [
+        "Produces exactly one self-contained HTML book",
+        "No leftover template placeholders",
+        "Spoken answers are in beats with bold cues (>= 15 beats)",
+        "Has Cues only toggle and auto index",
+        "At least 3 questions to ask are grounded in a cited source URL",
+        "Unknown candidate details are marked as highlighted gaps",
+        "Writes down questions for the candidate (>= 3)",
+        "No invented candidate facts (judged)",
+        "Frames the career change honestly on a Frame card",
+        "Scoped to a recruiter screen"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "cx-engineer-hm-intro-with-candidate-profile",
+      "prompt": "Prepping for a 45-minute video call with Dana, head of customer experience at Linear, on Monday 9am PT, for the Customer Experience Engineer role. My candidate-profile.md, the posting and the recruiter note are in this folder: evals/files/eval3/. Build me the briefing book.",
+      "expected_output": "A briefing book that draws stories and motivations from the candidate profile (2am replay pages, 60-day deprecation policy), frames the GraphQL gap as the profile states, never mentions previous salary, and needs few highlighted gaps.",
+      "files": [
+        "evals/files/eval3/candidate-profile.md",
+        "evals/files/eval3/posting.md",
+        "evals/files/eval3/message.md"
+      ],
+      "assertions": [
+        "Produces exactly one self-contained HTML book",
+        "No leftover template placeholders",
+        "Spoken answers are in beats with bold cues (>= 15 beats)",
+        "Has Cues only toggle and auto index",
+        "At least 3 questions to ask are grounded in a cited source URL",
+        "Unknown candidate details are marked as highlighted gaps",
+        "Writes down questions for the candidate (>= 3)",
+        "No invented candidate facts (judged)",
+        "Uses the profile's real motivations and outcomes",
+        "Frames the GraphQL gap on a Frame card",
+        "Needs clearly fewer gaps when a profile exists (< 30; no-profile books had 35-46)",
+        "Never mentions previous salary"
+      ]
+    }
+  ]
+}

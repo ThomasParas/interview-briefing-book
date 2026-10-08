@@ -11,6 +11,7 @@
      state (tab, checklist, cues mode) doesn't collide with other books in the same browser.
   4. Index: every <h2> is indexed automatically. To also index a card, add
      data-q="Short label" to it (questions, stories, gaps). Keep labels under ~70 characters.
+     Tabs with fewer than 3 index entries get no index (it would just be clutter).
   5. Delete any example card you don't need. Don't leave placeholder text in the final book;
      candidate-specific gaps you can't fill go in <span class="fill">[what's needed]</span>.
 
@@ -305,7 +306,7 @@ ol.steps li b{color:var(--text)}
 </div>
 
 <h2>Questions to ask (pick three or four)</h2>
-<!-- REPLACE: 5–8 questions. The best ones are grounded in something specific: their docs, changelog, a post, or the candidate's own hands-on test. Cite the source. -->
+<!-- REPLACE: 5–8 questions. At least 3 must be grounded in something specific (their docs, changelog, a post, the candidate's own hands-on test) and cite it in a p.src line. Standard questions (next steps, what great looks like) need no source line: omit p.src. -->
 <div class="card ask" data-q="{{SHORT_QUESTION_LABEL}}">
   <span class="chip ask">Ask, best one</span>
   <p class="line">{{QUESTION}}</p>
@@ -472,7 +473,8 @@ ol.steps li b{color:var(--text)}
       else if(cur){cur.kids.push({id:node.id,label:label})}
       else{groups.push({id:node.id,label:label,kids:[]})}
     });
-    if(!groups.length){nav.remove();return}
+    var entries=groups.reduce(function(n,g){return n+1+g.kids.length},0);
+    if(entries<3){nav.remove();return} /* a one- or two-link index is clutter */
     nav.setAttribute('aria-label','Index'); nav.id=panel.id+'-index';
     nav.appendChild(el('p','toc-h','Jump to'));
     var ol=el('ol');
