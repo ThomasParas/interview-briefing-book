@@ -32,9 +32,25 @@ It's built for **early conversational stages**: recruiter screens, hiring-manage
 
 ## Install
 
-The skill is the folder [`skills/interview-briefing-book/`](skills/interview-briefing-book). It follows the Agent Skills format (a folder with a `SKILL.md`), so any harness that supports skills can use it. Copy or symlink that folder into your harness's skills directory.
+```bash
+npx skills add ThomasParas/interview-briefing-book
+```
 
-**Claude Code** (personal skills, available in every project):
+This uses the open [`skills` CLI](https://github.com/vercel-labs/skills), which knows where Claude Code, Codex, Cursor, OpenCode and dozens of other agents keep their skills, and asks which ones you use. Add `-g` to install it for your user (every project) instead of just the current project.
+
+Later:
+
+```bash
+npx skills update interview-briefing-book    # get the latest version
+npx skills remove interview-briefing-book    # uninstall
+```
+
+As with any skill, read it before you use it (it's a few Markdown files and one HTML template); skills run with your agent's permissions.
+
+<details>
+<summary>Without Node.js (manual install)</summary>
+
+The skill is the folder [`skills/interview-briefing-book/`](skills/interview-briefing-book), in the standard Agent Skills format (a folder with a `SKILL.md`). Copy it into your agent's skills directory. For Claude Code, personal skills (available in every project):
 
 ```bash
 git clone https://github.com/ThomasParas/interview-briefing-book.git
@@ -42,9 +58,11 @@ mkdir -p ~/.claude/skills
 cp -r interview-briefing-book/skills/interview-briefing-book ~/.claude/skills/
 ```
 
-**Other harnesses:** copy `skills/interview-briefing-book/` wherever your tool loads skills from. Check its docs for the location.
+**Other agents:** copy the folder wherever your tool loads skills from (check its docs).
 
 **Claude.ai:** zip the `interview-briefing-book` folder and upload it as a skill in your settings.
+
+</details>
 
 ## Use
 
